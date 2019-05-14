@@ -1,0 +1,33 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "extends": ["eslint:recommended",
+              "plugin:jest/recommended",
+              "plugin:@typescript-eslint/recommended",
+              "plugin:prettier/recommended",
+              "prettier",
+              "prettier/@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint",
+              "prettier",
+              "jest"],
+  "overrides": {
+    "files": [
+      "__tests__/**/*.ts"
+    ]
+  },
+  "rules": {
+    "no-console": "off",
+    "prettier/prettier": "error",
+    "no-use-before-define": "off", // "@typescript-eslint/no-use-before-define"と重複するので無効化
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}
