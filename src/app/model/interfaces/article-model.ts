@@ -7,7 +7,7 @@ export default interface ArticleModel extends mongoose.Document {
   createDate: Date;
   updateDate?: Date;
   title: string;
-  abstract: string;
+  abstract?: string;
   content: {
     type: ContentType;
     body: string;

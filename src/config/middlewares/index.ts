@@ -25,7 +25,8 @@ class RootMiddleware {
       origin: Constants.FRONT_SERVER_ORIGIN,
       allowMethods: ["GET"],
       allowHeaders: ["Content-Type", "Authorization"],
-      exposeHeaders: ["Content-Length", "Date", "X-Request-Id"]
+      exposeHeaders: ["Content-Length", "Date", "X-Request-Id"],
+      credentials: true
     });
 
     const middlewares = [

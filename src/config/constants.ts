@@ -14,7 +14,11 @@ const constants = Object.assign(constantSets.base, constantSets[env]);
 
 class Constants {
   public static get DB_CONNECTION_STRING() {
-    return constants.DB_CONNECTION_STRING;
+    if (process.env.DB_URL) {
+      return process.env.DB_URL;
+    } else {
+      return constants.DB_CONNECTION_STRING;
+    }
   }
 
   public static get FRONT_SERVER_ORIGIN() {

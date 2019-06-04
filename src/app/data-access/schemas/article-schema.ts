@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
   },
   abstract: {
     type: String,
-    required: true
+    required: false
   },
   content: {
     type: {

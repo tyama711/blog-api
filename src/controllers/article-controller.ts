@@ -12,10 +12,11 @@ export default class ArticleController
       ctx.throw(500, "ctx.session is null.");
     } else {
       const article: IArticleModel = ctx.request.body as IArticleModel;
+      article.userId = ctx.session.passport.user;
+
       const articleBusiness = new ArticleBusiness();
       const result = await articleBusiness.create(article);
 
-      article.userId = ctx.session.passport.user;
       ctx.body = { ok: true, _id: result._id };
     }
   }

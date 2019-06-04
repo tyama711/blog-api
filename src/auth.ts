@@ -1,5 +1,6 @@
 import passport from "koa-passport";
 import passportLocal from "passport-local";
+import { compareSync } from "bcrypt";
 import * as _ from "lodash";
 import User from "./app/model/interfaces/user-model";
 import UserBusiness from "./app/business/user-business";
@@ -33,7 +34,10 @@ export default class Authenticator {
       new LocalStrategy(function(username, password, done) {
         fetchUser(username)
           .then(user => {
-            if (username === user.username && password === user.password) {
+            if (
+              username === user.username &&
+              compareSync(password, user.password)
+            ) {
               user = user.toObject();
               delete user.password;
               done(null, user);
