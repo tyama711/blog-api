@@ -1,0 +1,6 @@
+runtime: nodejs10
+env_variables:
+  NODE_ENV: 'production'
+  DB_URL: '<MONGODB_URL>'
+  PORT: <PORT_NUMBER>
+  
