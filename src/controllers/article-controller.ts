@@ -6,10 +6,8 @@ import IArticleModel from "../app/model/interfaces/article-model";
 export default class ArticleController
   implements IBaseController<ArticleBusiness> {
   public async create(ctx: Koa.Context) {
-    if (ctx.isUnauthenticated()) {
+    if (ctx.session === null || !ctx.isAuthenticated()) {
       ctx.throw(401);
-    } else if (ctx.session === null) {
-      ctx.throw(500, "ctx.session is null.");
     } else {
       const article: IArticleModel = ctx.request.body as IArticleModel;
       article.userId = ctx.session.passport.user;

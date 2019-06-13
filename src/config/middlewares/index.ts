@@ -10,17 +10,6 @@ import Constants from "../constants";
 
 class RootMiddleware {
   static configuration = () => {
-    // const errorHandler: Koa.Middleware<Koa.Context> = async (ctx, next) => {
-    //   try {
-    //     await next();
-    //   } catch (err) {
-    //     console.log(JSON.stringify(err));
-    //     ctx.status = err.status || 500;
-    //     ctx.body = { ok: false, message: err.message };
-    //     ctx.emit("error", err, ctx);
-    //   }
-    // };
-
     const corsMiddleware = cors({
       origin: Constants.FRONT_SERVER_ORIGIN,
       allowMethods: ["GET"],

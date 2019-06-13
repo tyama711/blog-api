@@ -12,7 +12,7 @@
     "lint-test": "eslint -c .eslintrc.json ./__tests__/**/*.ts",
     "build": "tsc",
     "test": "NODE_ENV=test jest --detectOpenHandles --silent=true --verbose=true",
-    "start": "node build/index.js"
+    "start": "node -r dotenv/config build/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -71,5 +71,10 @@
     "mongoose": "^5.5.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
+  },
+  "nodemonConfig": {
+    "watch": ["src"],
+    "ext": "ts",
+    "exec": "ts-node -r dotenv/config ./src/index.ts"
   }
 }
