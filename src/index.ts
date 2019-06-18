@@ -24,8 +24,12 @@ const errorHandler: Koa.Middleware<Koa.Context> = async (ctx, next) => {
 };
 app.use(errorHandler);
 
-app.keys = ["secret key"];
-app.use(session({}, app));
+app.keys = [process.env.KOA_APP_KEY || "secret key"];
+
+const config = {
+  maxAge: 24 * 60 * 60 * 1000 /* ms */
+};
+app.use(session(config, app));
 
 app.use(Middlewares.configuration());
 

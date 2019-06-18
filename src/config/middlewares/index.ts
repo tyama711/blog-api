@@ -12,7 +12,7 @@ class RootMiddleware {
   static configuration = () => {
     const corsMiddleware = cors({
       origin: Constants.FRONT_SERVER_ORIGIN,
-      allowMethods: ["GET"],
+      allowMethods: ["GET", "PUT"],
       allowHeaders: ["Content-Type", "Authorization"],
       exposeHeaders: ["Content-Length", "Date", "X-Request-Id"],
       credentials: true
