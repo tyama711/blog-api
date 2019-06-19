@@ -1,10 +1,15 @@
 import Koa from "koa";
 import http from "http";
 import session from "koa-session";
+import koaLogger = require("koa-logger");
+import cors = require("@koa/cors");
+import bodyParser = require("koa-bodyparser");
+import passport from "koa-passport";
 
-import Middlewares from "./config/middlewares";
-import Db from "./app/data-access/db";
+import RootRouter from "./config/router";
 import Constants from "./config/constants";
+// import Middlewares from "./config/middlewares";
+import Db from "./app/data-access/db";
 import Authenticator from "./auth";
 
 Db.connect(Constants.DB_CONNECTION_STRING);
@@ -19,21 +24,35 @@ const errorHandler: Koa.Middleware<Koa.Context> = async (ctx, next) => {
   } catch (err) {
     ctx.status = err.status || 500;
     ctx.body = { ok: false, message: err.message };
-    app.emit("error", err, ctx);
+    ctx.app.emit("error", err, ctx);
   }
 };
-app.use(errorHandler);
+
+const corsOptions = {
+  origin: Constants.FRONT_SERVER_ORIGIN,
+  allowMethods: ["GET", "PUT"],
+  allowHeaders: ["Content-Type", "Authorization"],
+  exposeHeaders: ["Content-Length", "Date", "X-Request-Id"],
+  credentials: true
+};
+
+const sessionOptions = {
+  maxAge: 24 * 60 * 60 * 1000 /* ms */
+};
 
 app.keys = [process.env.KOA_APP_KEY || "secret key"];
 
-const config = {
-  maxAge: 24 * 60 * 60 * 1000 /* ms */
-};
-app.use(session(config, app));
+app.use(errorHandler);
+app.use(session(sessionOptions, app));
+app.use(koaLogger());
+app.use(cors(corsOptions));
+app.use(bodyParser());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(new RootRouter().routes as Koa.Middleware);
+// app.use(Middlewares.configuration());
 
-app.use(Middlewares.configuration());
-
-app.on("error", (err, ctx) => {
+app.on("error", (err, ctx: Koa.Context) => {
   /* centralized error handling:
    *   console.log error
    *   write error to log file
