@@ -6,7 +6,6 @@ import User from "./app/model/interfaces/user-model";
 import UserBusiness from "./app/business/user-business";
 
 const fetchUser = async (username: string): Promise<User> => {
-  // This is an example! Use password hashing in your project and avoid storing passwords in your code
   const user = await new UserBusiness().findOne({ username });
   if (user === null) {
     throw new Error();
