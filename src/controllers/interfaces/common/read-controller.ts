@@ -1,6 +1,6 @@
-import RequestHandler from "./request-handler";
+import RequestHandler from './request-handler'
 
 export default interface ReadController {
-  retrieve: RequestHandler;
-  findOne: RequestHandler;
+  retrieve: RequestHandler
+  findOne: RequestHandler
 }

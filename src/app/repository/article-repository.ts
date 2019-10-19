@@ -1,12 +1,12 @@
-import IArticleModel from "../model/interfaces/article-model";
-import ArticleSchema from "../data-access/schemas/article-schema";
-import RepositoryBase from "./base/repository-base";
+import IArticleModel from '../model/interfaces/article-model'
+import ArticleSchema from '../data-access/schemas/article-schema'
+import RepositoryBase from './base/repository-base'
 
 class ArticleRepository extends RepositoryBase<IArticleModel> {
   constructor() {
-    super(ArticleSchema);
+    super(ArticleSchema)
   }
 }
 
-Object.seal(ArticleRepository);
-export default ArticleRepository;
+Object.seal(ArticleRepository)
+export default ArticleRepository

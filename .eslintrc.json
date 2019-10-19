@@ -4,30 +4,35 @@
     "node": true,
     "jest/globals": true
   },
-  "extends": ["eslint:recommended",
-              "plugin:jest/recommended",
-              "plugin:@typescript-eslint/recommended",
-              "plugin:prettier/recommended",
-              "prettier",
-              "prettier/@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:jest/recommended",
+    "prettier",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint",
-              "prettier",
-              "jest"],
-  "overrides": {
-    "files": [
-      "__tests__/**/*.ts"
-    ]
-  },
+  "plugins": ["@typescript-eslint", "prettier", "jest"],
   "rules": {
-    "no-console": "off",
     "prettier/prettier": "error",
     "no-use-before-define": "off", // "@typescript-eslint/no-use-before-define"と重複するので無効化
-    "@typescript-eslint/no-use-before-define": "off",
+    "require-atomic-updates": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    //"@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      { "allowSingleExtends": true }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      { "checksVoidReturn": false }
+    ],
+    "@typescript-eslint/unbound-method": ["error", { "ignoreStatic": true }]
   }
 }

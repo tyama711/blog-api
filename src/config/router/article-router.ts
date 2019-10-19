@@ -1,24 +1,18 @@
-import Router from "koa-router";
-import ArticleController from "../../controllers/article-controller";
+import Router from 'koa-router'
+import ArticleController from '../../controllers/article-controller'
 
-const router = new Router<any, any>();
+const router = new Router<any, any>()
 class ArticleRouter {
-  private _articleController: ArticleController;
-
-  constructor() {
-    this._articleController = new ArticleController();
-  }
   get routes() {
-    const controller = this._articleController;
-    router.get("/", controller.retrieve);
-    router.post("/", controller.create);
-    router.put("/:_id", controller.update);
-    router.get("/:_id", controller.findOne);
-    router.delete("/:_id", controller.delete);
+    router.get('/', ArticleController.retrieve)
+    router.post('/', ArticleController.create)
+    router.put('/:_id', ArticleController.update)
+    router.get('/:_id', ArticleController.findOne)
+    router.delete('/:_id', ArticleController.delete)
 
-    return router.routes();
+    return router.routes()
   }
 }
 
-Object.seal(ArticleRouter);
-export default ArticleRouter;
+Object.seal(ArticleRouter)
+export default ArticleRouter

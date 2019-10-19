@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 export default interface UserModel extends mongoose.Document {
-  username: string;
-  password: string;
+  username: string
+  password: string
 }

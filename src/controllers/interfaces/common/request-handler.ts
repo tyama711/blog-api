@@ -1,5 +1,5 @@
-import Koa from "koa";
+import Koa from 'koa'
 
 export default interface RequestHandler {
-  (ctx: Koa.Context): Promise<any>;
+  (ctx: Koa.Context): Promise<void>
 }

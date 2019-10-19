@@ -1,20 +1,23 @@
-import Koa from "koa";
-import passport from "koa-passport";
+import Koa from 'koa'
+import passport from 'koa-passport'
 
 export default class AuthController {
-  public login(ctx: Koa.Context, next: () => Promise<any>) {
-    return passport.authenticate("local", (err, user) => {
+  public static login(
+    ctx: Koa.Context,
+    next: () => Promise<void>
+  ): Koa.Middleware {
+    return passport.authenticate('local', (err, user) => {
       if (!user) {
-        ctx.throw(401, err);
+        ctx.throw(401, err)
       } else {
-        ctx.body = user;
-        return ctx.login(user);
+        ctx.body = user
+        return ctx.login(user)
       }
-    })(ctx, next);
+    })(ctx, next)
   }
 
-  public logout(ctx: Koa.Context) {
-    ctx.logout();
-    ctx.body = {};
+  public static logout(ctx: Koa.Context): void {
+    ctx.logout()
+    ctx.body = {}
   }
 }
